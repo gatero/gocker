@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  golang:
+    image: gatero/gocker
+    container_name: dev.api.daniel-ortega.mx
+    restart: always
+    ports:
+      - 8080:8080
+  mysql:
+    image: mysql
+    container_name: dev.db.daniel-ortega.mx
+    restart: always
+    environment:
+      MYSQL_DATABASE: do_api
+      MYSQL_ROOT_PASSWORD: root
+  proxy:
+networks:
+  cc:
+    driver: bridge
