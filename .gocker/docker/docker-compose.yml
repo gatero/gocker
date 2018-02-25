@@ -10,10 +10,6 @@ services:
       - cc
     links:
       - mysql:mysql
-    entrypoint: ./entry-point.sh
-    working_dir: /go/src/app
-    volumes:
-      - .:/go/src/app
   mysql:
     image: mysql
     container_name: dev.db.daniel-ortega.mx

@@ -4,6 +4,5 @@ COPY ./entry-point.sh /go/src/app
 RUN go-wrapper download github.com/golang/dep/cmd/dep && \
     go-wrapper install github.com/golang/dep/cmd/dep && \
     go-wrapper download github.com/markbates/refresh && \
-    go-wrapper install github.com/markbates/refresh && \
-    chown -R "$(id -u)":"$(id -g)" vendor Gopkg.*
+    go-wrapper install github.com/markbates/refresh
 CMD ["go-wrapper", "run"]
