@@ -10,8 +10,8 @@ services:
       - cc
     volumes:
       - "${PROJECT_DIR}:/go/src/app"
-    environment:
-      VIRTUAL_HOST: "${DOCKER_CONTAINER_API}"
+    #environment:
+      #VIRTUAL_HOST: "${DOCKER_CONTAINER_API}"
   mysql:
     image: mysql
     container_name: "${DOCKER_CONTAINER_DB}"
@@ -21,14 +21,14 @@ services:
       MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     networks:
       - cc
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    ports:
-      - "80:80"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    networks:
-      - cc
+  #nginx-proxy:
+    #image: jwilder/nginx-proxy
+    #ports:
+      #- "80:80"
+    #volumes:
+      #- /var/run/docker.sock:/tmp/docker.sock:ro
+    #networks:
+      #- cc
 networks:
   cc:
     driver: bridge

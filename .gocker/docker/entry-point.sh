@@ -3,8 +3,6 @@
 LOCKFILE="./vendor/.lockfile"
 MANIFEST="Gopkg.toml"
 
-printf "%b" "${PURPLE_BOLD}ENTRY POINT RUNING${NO_COLOR}"
-
 if [ ! -e Gopkg.toml ]; then
   dep init -v
   cp $MANIFEST $LOCKFILE > /dev/null 2>&1
@@ -18,5 +16,7 @@ if [ -d ./vendor ]; then
     chown -R gocker:gocker {./vendor,Gopkg.*}
   fi
 fi
+
+printf "%s" "${PURPLE_BOLD}ENTRY POINT RUNING${NO_COLOR}"
 
 refresh run
