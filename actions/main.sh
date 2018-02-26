@@ -1,7 +1,7 @@
-. .gocker/actions/start.sh
-. .gocker/actions/destroy.sh
-. .gocker/actions/init.sh
-. .gocker/actions/rebuild.sh
-. .gocker/actions/run.sh
-. .gocker/actions/start.sh
-. .gocker/actions/verify-dependencies.sh
+. ${GOCKER_DIR}/actions/start.sh
+. ${GOCKER_DIR}/actions/destroy.sh
+. ${GOCKER_DIR}/actions/init.sh
+. ${GOCKER_DIR}/actions/rebuild.sh
+. ${GOCKER_DIR}/actions/run.sh
+. ${GOCKER_DIR}/actions/start.sh
+. ${GOCKER_DIR}/actions/verify-dependencies.sh
