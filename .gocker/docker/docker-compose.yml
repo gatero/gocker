@@ -1,22 +1,32 @@
 version: '3.3'
 services:
   golang:
-    image: gatero/gocker
-    container_name: dev.api.daniel-ortega.mx
-    restart: always
-    ports:
-      - 8080:8080
+    image: "${DOCKER_IMAGE_GOLANG}"
+    container_name: "${DOCKER_CONTAINER_API}"
+    #restart: always
+    depends_on:
+      - mysql
     networks:
       - cc
-    links:
-      - mysql:mysql
+    volumes:
+      - "${PROJECT_DIR}:/go/src/app"
+    environment:
+      VIRTUAL_HOST: "${DOCKER_CONTAINER_API}"
   mysql:
     image: mysql
-    container_name: dev.db.daniel-ortega.mx
-    restart: always
+    container_name: "${DOCKER_CONTAINER_DB}"
+    #restart: always
     environment:
-      MYSQL_DATABASE: do_api
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    networks:
+      - cc
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
       - cc
 networks:
