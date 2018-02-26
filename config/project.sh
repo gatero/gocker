@@ -13,4 +13,3 @@ export DB_NAME="do_api"
 export DB_PASSWORD="root"
 export DB_USERNAME="root"
 export PROJECT_DIR="$PWD"
-export GOCKER_DIR=$(dirname "${BASH_SOURCE[0]}") && pwd
