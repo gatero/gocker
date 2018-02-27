@@ -5,6 +5,23 @@ MSG_GOLANG_IMAGE="${GREEN_REGULAR}Stopping and removing the golang container${NO
 MSG_DATABASE="${GREEN_REGULAR}Stopping and removing the db container${NO_COLOR}${DOCKER_CONTAINER_DB}"
 MSG_API_REST="${GREEN_REGULAR}Stopping and removing api the container${NO_COLOR}${DOCKER_CONTAINER_API}"
 
+function destroy {
+  printf "%b" "${MSG_VENDOR}"
+  rm -rf vendor
+
+  while getopts ":d:i:a:r:h" option; do
+    case "${option}"
+      in
+      d) database ;;
+      i) golang_image ;;
+      a) all ;;
+      r) api_rest ;;
+      h|*) destroy_docs ;;
+    esac
+  done
+}
+
+export -f destroy
 
 function golang_image {
   printf "%b" "${MSG_GOLANG_IMAGE}"
@@ -33,25 +50,6 @@ function all {
 }
 
 function destroy_docs {
-  cat $GOCKER_DIR/doc/destroy.txt
+  cat "${GOCKER_DIR}/doc/destroy.txt"
 }
 
-function destroy {
-  printf "%b\n" "${MSG_VENDOR}"
-  rm -rf vendor
-
-  echo "aqui meregngues\n"
-  while getopts ":d:i:a:r:h" option
-  do
-    case "${option}"
-      in
-      d) database ;;
-      i) golang_image ;;
-      a) all ;;
-      r) api_rest ;;
-      *|h) destroy_docs ;;
-    esac
-  done
-}
-
-export -f destroy

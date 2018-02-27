@@ -7,10 +7,10 @@ export GOCKER_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.gocker"
 . ${GOCKER_DIR}/actions/main.sh
 
 case $1 in
-  destroy) destroy "${@:2}" ;;
-  init) init "${@:2}" ;;
-  start) start "${@:2}" ;;
-  run) run "${@:2}" ;;
+  destroy) destroy "$@" ;;
+  init) init "$@" ;;
+  start) start "$@" ;;
+  run) run "$@" ;;
   context) . ${GOCKER_DIR}/config/main.sh ;;
-  rebuild) rebuild "${@:2}" ;;
+  rebuild) rebuild "$@" ;;
 esac

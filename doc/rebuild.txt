@@ -1,0 +1,20 @@
+USAGE:
+
+  sh gocker rebuild [-c] [-a] [-h]
+
+OPTIONS:
+
+  c) This options destroy and rebuild the containers
+  a) This option destroy the containers, the docker image and then rebuild them
+  h) Help option
+
+EXAMPLE:
+  
+  # Remove the containers
+  sh gocker rebuild -c
+
+  # remove the containers and the docker image
+  sh gocker rebuild -a
+
+  # show help
+  sh gocker rebuild -h

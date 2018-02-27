@@ -1,19 +1,25 @@
 USAGE:
+
   sh gocker destroy [-d] [-i] [-a] [-r] [-h]
 
 OPTIONS:
-  -d: Use this to destroy only the database
-  -i: Use this to destroy only the docker image
-  -a: This option will destroy the db and the api containers and the golang image
-  -h: Help option
+
+  -d) Use this to destroy only the database
+  -i) Use this to destroy only the docker image
+  -a) This option will destroy the db and the api containers and the golang image
+  -h) Help option
 
 EXAMPLES:
+
   # Destroy the database container
   sh gocker destroy -d
+
   # Destroy the docker image
   sh gocker destroy -i
+
   # Removes the api container
   sh gocker destroy -r
+
   # Remove all
   sh gocker destroy -a
 

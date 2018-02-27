@@ -1,11 +1,12 @@
 #!/bin/bash
 
 function docker_compose {
-  docker-compose -f $1 up
+  compose_file=$1
+  docker-compose -f "$compose_file" up
 }
 
 function build_image {
-  docker build -t gatero/gocker .gocker/docker;
+  docker build -t gatero/gocker "${GOCKER_DIR}/docker"
 }
 
 function start_project {
@@ -13,23 +14,29 @@ function start_project {
 
   if [ -f "$compose_file" ]; then
     if [[ "$(docker images)" =~ $DOCKER_IMAGE_GOLANG ]]; then
-      docker_compose $compose_file
+      docker_compose "$compose_file"
     else
-      build_image && docker_compose $compose_file
+      build_image && docker_compose "$compose_file"
     fi
   fi
 }
 
-function doc {
-  cat $GOCKER_DIR/doc/start.txt
+function default {
+  start_project "${GOCKER_DIR}/docker/docker-compose.yml"
+}
+
+function start_docs {
+  cat "${GOCKER_DIR}/doc/start.txt"
 }
 
 function start {
-  while getopts ":f:" option; do
+  echo $OPTIND
+  while getopts ":f:d:h" option; do
     case "${option}"
       in
-      f) start_project "${OPTARG:-Plase enter a valid file location}" ;;
-      *|h) doc ;;
+      f) start_project "${OPTARG:-Plase enter a file location}" ;;
+      d) default ;;
+      h|*) start_docs ;;
     esac
   done
 }
