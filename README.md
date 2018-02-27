@@ -17,6 +17,6 @@ The tool is composed by 6 tasks:
   example:
     .gocker/gocker.sh destroy -<a|d|i>
 
-In all cases you need invocke gocker as follows:
+In all cases you need use gocker as follows:
 
 .gocker/gocker.sh <command> <options>
