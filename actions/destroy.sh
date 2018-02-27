@@ -1,39 +1,46 @@
 #!/bin/bash
 
+MSG_VENDOR="${GREEN_REGULAR}Removing vendor dir${NO_COLOR}"
+MSG_GOLANG_IMAGE="${GREEN_REGULAR}Stopping and removing the golang container${NO_COLOR}${DOCKER_IMAGE_GOLANG}"
+MSG_DATABASE="${GREEN_REGULAR}Stopping and removing the db container${NO_COLOR}${DOCKER_CONTAINER_DB}"
+MSG_API_REST="${GREEN_REGULAR}Stopping and removing api the container${NO_COLOR}${DOCKER_CONTAINER_API}"
+
+
 function golang_image {
-  printf "%b" "${GREEN_REGULAR}Stopping and removing the golang container: ${NO_COLOR}${DOCKER_IMAGE_GOLANG}"
+  printf "%b" "${MSG_GOLANG_IMAGE}"
   docker rmi -f "${DOCKER_IMAGE_GOLANG}"
 }
 
 function database {
-  printf "%b" "${GREEN_REGULAR}Stopping and removing the db container: ${NO_COLOR}${DOCKER_CONTAINER_DB}"
+  printf "%b" "${MSG_DATABASE}"
   docker rm -f "${DOCKER_CONTAINER_DB}"
-}
-
-function all {
-  printf "%b" "${GREEN_REGULAR}Stopping and removing api container: ${NO_COLOR}${DOCKER_CONTAINER_API}"
-  docker rm -f "${DOCKER_CONTAINER_API}"
-  
-  printf "%b" "${GREEN_REGULAR}Stopping and removing db container: ${NO_COLOR}${DOCKER_CONTAINER_DB}"
-  docker rm -f "${DOCKER_CONTAINER_DB}"
-
-  printf "%b" "${GREEN_REGULAR}Stopping and removing containers and image: ${NO_COLOR}"
-  docker rmi -f "${DOCKER_IMAGE_GOLANG}"
 }
 
 function api_rest {
-  printf "%b" "${GREEN_REGULAR}Stopping and removing api the container: ${NO_COLOR}${DOCKER_CONTAINER_API}"
+  printf "%b" "${MSG_API_REST}"
   docker rm -f "${DOCKER_CONTAINER_API}"
 }
 
-function doc {
+function all {
+  printf "%b" "${MSG_API_REST}"
+  docker rm -f "${DOCKER_CONTAINER_API}"
+  
+  printf "%b" "${MSG_DATABASE}"
+  docker rm -f "${DOCKER_CONTAINER_DB}"
+
+  printf "%b" "${MSG_GOLANG_IMAGE}"
+  docker rmi -f "${DOCKER_IMAGE_GOLANG}"
+}
+
+function destroy_docs {
   cat $GOCKER_DIR/doc/destroy.txt
 }
 
 function destroy {
-  printf "%b\n" "${GREEN_REGULAR}Removing vendor dir${NO_COLOR}"
+  printf "%b\n" "${MSG_VENDOR}"
   rm -rf vendor
 
+  echo "aqui meregngues\n"
   while getopts ":d:i:a:r:h" option
   do
     case "${option}"
@@ -42,7 +49,7 @@ function destroy {
       i) golang_image ;;
       a) all ;;
       r) api_rest ;;
-      *|h) doc ;;
+      *|h) destroy_docs ;;
     esac
   done
 }
