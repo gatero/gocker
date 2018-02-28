@@ -1,6 +1,6 @@
 USAGE:
 
-  sh gocker start [-f]
+  sh gocker up [-f] [-d] [-h]
 
 OPTIONS:
 
@@ -11,7 +11,10 @@ OPTIONS:
 EXAMPLE:
 
   # Using your own docker-compose file
-  sh gocker start -f path/to/docker-compose-yml
+  sh gocker up -f path/to/docker-compose-yml
 
   # Use the default configuration
-  sh gocker start -d
+  sh gocker up -d yes
+
+  # Prints helps
+  sh gocker up -h
