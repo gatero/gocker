@@ -13,7 +13,7 @@ function verify_docker {
 export -f verify_docker
 
 function verify_docker_containers {
-  if [ "${1}" != "start" ] && [ "${1}" != "rebuild" ]; then
+  if [ "${1}" != "up" ] && [ "${1}" != "rebuild" ]; then
     if [ "$(docker ps -a -f name=$DOCKER_CONTAINER_DB | wc -l)" -ne 2 ]; then
       printf "%b" "${RED_REGULAR}[docker] The db container doesn't exist, please run start command ${NO_COLOR}"
       if [ "$(docker ps -a -f name=$DOCKER_CONTAINER_API | wc -l)" -ne 2 ]; then

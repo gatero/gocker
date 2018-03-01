@@ -1,0 +1,14 @@
+USAGE:
+
+  sh gocker rebuild [-c] [-a] [-h]
+
+OPTIONS:
+  h) Help option
+
+EXAMPLE:
+  
+  # Remove the containers
+  sh gocker rebuild
+
+  # show help
+  sh gocker rebuild -h

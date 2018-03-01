@@ -1,0 +1,20 @@
+USAGE:
+
+  sh gocker up [-f] [-d] [-h]
+
+OPTIONS:
+
+  -f) Use this option to pass your docker-compose file
+  -d) Use this option to run the docker compose contained on gocker/docker/docker-compose.yml
+  -h) Help option
+
+EXAMPLE:
+
+  # Using your own docker-compose file
+  sh gocker up -f path/to/docker-compose-yml
+
+  # Use the default configuration
+  sh gocker up -d yes
+
+  # Prints helps
+  sh gocker up -h
