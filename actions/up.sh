@@ -3,15 +3,14 @@
 #: Title : up
 #: Date : 27/feb/2017
 #: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
-#: Version : 0.1.1
+#: Version : 0.0.3
 #: Description : Run the project using docker-compose
 #: Options : 
 #:    -f) use your own docker-file
 #:    -d) default docker-compose
-#:    -h) help option
+#:    -h|*) help option
 
 #: Type : function
-#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Description : run docker compose command using the file
 #: passed through -f option
 run_docker() {
@@ -20,14 +19,12 @@ run_docker() {
 }
 
 #: Type : function
-#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Description : wrapper for docker build command
 build_image() {
   docker build -t gatero/gocker "${GOCKER_DIR}/docker"
 }
 
 #: Type : function
-#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Description : Verify if the docker_compose_file file is defined
 #: and checks if the docker image exist and then start the project
 start_project() {
@@ -43,7 +40,6 @@ start_project() {
 }
 
 #: Type: function
-#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Description : use the docker compose file contained
 #: in the project by default
 run_default() {
@@ -51,14 +47,12 @@ run_default() {
 }
 
 #: Type : function
-#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Description : print the configuration for up module
 docs() {
   cat "${GOCKER_DIR}/doc/up.txt"
 }
 
 #: Type : function
-#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Description : run the program depends on passed options
 up() {
   while getopts ":dhf:" option; do
