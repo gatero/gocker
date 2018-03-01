@@ -19,21 +19,21 @@ run_in_api() {
 
 #: Type : function
 #: Description : print the configuration for up module
-docs() {
-  cat $GOCKER_DIR/doc/run.txt
+show_docs() {
+  cat "$GOCKER_DIR/doc/run.txt"
 }
 
 #: Type : function
 #: Description : run the program depends on passed options
 run() {
-  if [ $# -eq 1 ]; then
-    if [ $1 == "-h" ]; then
-      docs
+  if [ "$#" -eq 1 ]; then
+    if [ "$1" == "-h" ]; then
+      show_docs
     else
       run_in_api "${@}"
     fi
   else
-    docs
+    show_docs
   fi
 }
 export -f run

@@ -48,21 +48,25 @@ run_default() {
 
 #: Type : function
 #: Description : print the configuration for up module
-docs() {
+show_docs() {
   cat "${GOCKER_DIR}/doc/up.txt"
 }
 
 #: Type : function
 #: Description : run the program depends on passed options
 up() {
-  while getopts ":dhf:" option; do
-    case "${option}"
-      in
-      d) shift && run_default ;;
-      f) shift && start_project "${OPTARG:-Plase enter a file location}" ;;
-      h|*) shift && docs ;;
-    esac
-  done
+  if [ $# -ne 0 ]; then
+    while getopts ":dhf:" option; do
+      case "${option}"
+        in
+        d) shift && run_default ;;
+        f) shift && start_project "${OPTARG:-Plase enter a file location}" ;;
+        h|*) shift && show_docs ;;
+      esac
+    done
+  else
+    show_docs
+  fi
 }
 
 export -f up

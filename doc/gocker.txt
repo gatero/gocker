@@ -1,0 +1,14 @@
+USAGE
+  sh gocker <subcommand> <options>
+
+SUBCOMMANDS
+  up) This subcommand runs the docker orchestation
+  rebuild) Destroy and rebuild docker image and containers
+  destroy) Destroy image, api and dabatase, one by one or all together
+  run) The intention of this subcommand is run an instruction inside of any specified container
+
+EXAMPLES
+  sh gocker up -f path/to/your/own/docker-file.yml
+  sh gocker rebuild
+  sh gocker destroy -a
+  sh gocker run echo "hello world !"

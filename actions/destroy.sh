@@ -49,26 +49,30 @@ all() {
 
 #: Type : function
 #: Description : print the configuration for up module
-docs() {
+show_docs() {
   cat "${GOCKER_DIR}/doc/destroy.txt"
 }
 
 #: Type : function
 #: Description : run the program depends on passed options
 destroy() {
-  printf "%b" "${MSG_VENDOR}"
-  rm -rf vendor
+  if [ $# -ne 0 ]; then
+    printf "%b" "${MSG_VENDOR}"
+    rm -rf vendor
 
-  while getopts ":diarh" option; do
-    case "${option}"
-      in
-      d) shift && database ;;
-      i) shift && golang_image ;;
-      a) shift && all ;;
-      r) shift && api_rest ;;
-      h|*) shift && docs ;;
-    esac
-  done
+    while getopts ":diarh" option; do
+      case "${option}"
+        in
+        d) shift && database ;;
+        i) shift && golang_image ;;
+        a) shift && all ;;
+        r) shift && api_rest ;;
+        h|*) shift && show_docs ;;
+      esac
+    done
+  else
+    show_docs
+  fi
 }
 
 export -f destroy

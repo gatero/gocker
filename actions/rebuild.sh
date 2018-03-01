@@ -18,25 +18,19 @@ build_image() {
 
 #: Type : function
 #: Description : print the configuration for up module
-doc() {
-  cat $GOCKER_DIR/doc/rebuild.txt
+show_doc() {
+  cat "${GOCKER_DIR}/doc/rebuild.txt"
 }
 
 #: Type : function
-#: Description : rebuild image and containers
+#: Description : show help
 rebuild() {
-  if [ $# -eq 1 ]; then
-    if [ $1 == "-h" ]; then
-      docs
-    else
-      if [[ "$(docker images)" =~ $DOCKER_IMAGE_GOLANG ]]; then
-        destroy -a && build_image
-      else
-        build_image
-      fi
+  if [ $1 != "-h" ]; then
+    if [[ "$(docker images)" =~ $DOCKER_IMAGE_GOLANG ]]; then
+      destroy -a && build_image
     fi
   else
-    docs
+    show_doc
   fi
 }
 
