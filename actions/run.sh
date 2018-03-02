@@ -26,14 +26,10 @@ show_docs() {
 #: Type : function
 #: Description : run the program depends on passed options
 run() {
-  if [ "$#" -eq 1 ]; then
-    if [ "$1" == "-h" ]; then
-      show_docs
-    else
-      run_in_api "${@}"
-    fi
-  else
+  if [ "$1" == "-h" ]; then
     show_docs
+  else
+    run_in_api "${@}"
   fi
 }
 export -f run
