@@ -31,11 +31,7 @@ start_project() {
   local docker_compose_file=$1
 
   if [ -f "$docker_compose_file" ]; then
-    if [[ "$(docker images)" =~ $DOCKER_IMAGE_GOLANG ]]; then
-      run_docker "$docker_compose_file"
-    else
-      build_image && run_docker "$docker_compose_file"
-    fi
+    run_docker "$docker_compose_file"
   fi
 }
 
