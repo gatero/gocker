@@ -1,15 +1,16 @@
 version: '3.3'
 services:
-  golang:
-    image: "${DOCKER_IMAGE_GOLANG}"
+  nodejs:
+    image : "node:8.9.4"
     container_name: "${DOCKER_CONTAINER_API}"
+    working_dir: "/app"
     #restart: always
     depends_on:
       - mongodb
     networks:
       - cc
     volumes:
-      - "${PROJECT_DIR}:/go/src/app"
+      - "${PROJECT_DIR}:/app"
     environment:
       VIRTUAL_HOST: "${DOCKER_CONTAINER_API}"
   mongodb:

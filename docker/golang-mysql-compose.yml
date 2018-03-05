@@ -5,20 +5,20 @@ services:
     container_name: "${DOCKER_CONTAINER_API}"
     #restart: always
     depends_on:
-      - mongodb
+      - mysql
     networks:
       - cc
     volumes:
       - "${PROJECT_DIR}:/go/src/app"
     environment:
       VIRTUAL_HOST: "${DOCKER_CONTAINER_API}"
-  mongodb:
-    image: mongo:3.6.3
+  mysql:
+    image: mysql
     container_name: "${DOCKER_CONTAINER_DB}"
     #restart: always
-    volumes:
-      - "./data/db:/data/db"
-    command: mongod --smallfiles --logpath=/dev/null
+    environment:
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
     networks:
       - cc
   nginx-proxy:
