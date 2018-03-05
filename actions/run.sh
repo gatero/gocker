@@ -1,8 +1,15 @@
 #!/bin/bash
+#: Title : run
+#: Date : 27/feb/2017
+#: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
+#: Version : 0.0.3
+#: Description : Run the project using docker-compose
+#: Options : 
+#:    -f) use your own docker-file
+#:    -d) default docker-compose
+#:    -h|*) help option
 
-#DOCKER_CONTAINERS=`docker container ls -a --format "table {{.ID}} {{.Names}}"`
 declare -a DOCKER_CONTAINERS=(`docker container ls --format "{{.Names}}"`)
-#echo $DOCKER_CONTAINERS
 
 #: Type : function
 #: Description : print the configuration for up module
@@ -23,27 +30,26 @@ while true; do
 option=1
 for i in "${DOCKER_CONTAINERS[@]}"
 do
-	echo "${option}) ${i}"
-	option=$((option+1))
+  echo "${option}) ${i}"
+  option=$((option+1))
 done
-	echo "0) exit"
+  echo "0) exit"
 echo -n "select the container number: "
 read container_number
-#echo "the selected container is: "${DOCKER_CONTAINERS[$option]}
 case $container_number in 
    0 ) exit;;
    * ) re='^[0-9]+$';
        if [[ $container_number =~ $re ]] ; then
        if [ $((option+0)) -gt $((container_number+0)) ]
        then
-            container_number=$((container_number-1))
-            container=${DOCKER_CONTAINERS[container_number]}
-	    display_command_menu $container $container_number;
+          container_number=$((container_number-1))
+          container=${DOCKER_CONTAINERS[container_number]}
+          display_command_menu $container $container_number;
    else
-	echo "invalid option:" $container_number
+          echo "invalid option:" $container_number
    fi
    else
-	echo "invalid option:" $container_number
+          echo "invalid option:" $container_number
    fi
 esac
 done
@@ -53,16 +59,15 @@ done
 #: Description : print menu for/and run command in container selected
 display_command_menu(){
    while true; do
-#   echo $1 $2
    echo "\"b\" for return to main menu, \"q\" to exit "
    echo -n "write the command to exec in" $1": "
    read command
    if [ "$command" == "b" ] 
    then
-	   break
+       break
    elif [ "$command" == "q" ]
    then  
-	   exit
+       exit
    else
       docker exec -i  $1 $command
       echo
