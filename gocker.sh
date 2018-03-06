@@ -9,7 +9,7 @@ export GOCKER_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.gocker"
 #: Verify if docker, docker image and docker containers exists
 verify_docker ${1} && verify_docker_containers ${1}
 
-#: Init the project and verify if configuration files(environment.cfg and docker-compose.yml) exists
+#: Init the project and verify if configuration files(rnvironment.cfg and docker-compose.yml) exists
 init
 
 show_gocker_docs() {
@@ -19,6 +19,7 @@ show_gocker_docs() {
 if [ $# -ne 0 ];  then
   if [ $1 != '-h' ]; then
     case $1 in
+      init) shift && init "$@" ;;
       up) shift && up "$@" ;;
       run) shift && run "$@" ;;
       context) shift && . ${GOCKER_DIR}/config/main.sh ;;

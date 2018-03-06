@@ -31,14 +31,14 @@ golang_image() {
 #: Description : remove database container
 database() {
   printf "%b" "${MSG_DATABASE}"
-  docker rm -f "${DOCKER_CONTAINER_DB}"
+  docker rm -f "${DOCKER_CONTAINERS[@]}"
 }
 
 #: Type : function
 #: Description : remove api rest container
 api_rest() {
   printf "%b" "${MSG_API_REST}"
-  docker rm -f "${DOCKER_CONTAINER_API}"
+  docker rm -f "${DOCKER_CONTAINERS[@]}"
 }
 
 #: Type : function
@@ -56,22 +56,23 @@ show_docs() {
 #: Type : function
 #: Description : run the program depends on passed options
 destroy() {
-  if [ $# -ne 0 ]; then
-    printf "%b" "${MSG_VENDOR}"
-    rm -rf vendor
+  if [ "${#DOCKER_CONTAINERS[@]}" -gt 0 ]; then
+    if [ $# -ne 0 ]; then
+      if [ -f ./vendor ]; then
+        printf "%b" "${MSG_VENDOR}"
+        rm -rf vendor
+      fi
 
-    while getopts ":diarh" option; do
-      case "${option}"
-        in
-        d) shift && database ;;
-        i) shift && golang_image ;;
-        a) shift && all ;;
-        r) shift && api_rest ;;
-        h|*) shift && show_docs ;;
-      esac
-    done
-  else
-    show_docs
+      while getopts ":diarh" option; do
+        case "${option}"
+          in
+          a) shift && all ;;
+          h|*) shift && show_docs ;;
+        esac
+      done
+    else
+      show_docs
+    fi
   fi
 }
 
