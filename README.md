@@ -5,18 +5,24 @@ uses docker the only requirement will be the custom docker-compose file for each
 
 ## Get started
 
-The tool is composed by 6 tasks:
+~~~sh
+# Download gocker as a submodule into your rootpath:
+$ git submodule add git@github.com:gatero/gocker.git .gocker
 
-- init: it will be a client to do easier the project configuration
-- start: start task find the dockerfile or the docker image on docker hub and then run all the orchestation using the docker-compose
-- run: this command allow you to run any command inside your docker container
-- context: set the current context in your tty instance
-- rebuild: rebuild the application context
-- destroy: this command has some aviable options that let's you destroy the container, the image, or db
-  
-  example:
-    .gocker/gocker.sh destroy -<a|d|i>
+# At your rootpath create a symlink to the gocker.sh file
+$ ln -s .gocker/gocker.sh gocker
 
-In all cases you need use gocker as follows:
+# after this you need create a docker-compose file into your rootpath, you can use the init subcommand to this purpose
+# this will create two empty files, docker-compose.yml and environment.cfg
+# you can define your custom environment vars into environment.cfg and use them on your docker-compose.yml
+$ sh gocker init 
 
-.gocker/gocker.sh <command> <options>
+# When you have your environment and docker compose ready you can run it with:
+$ sh gocker up
+
+# if you need destroy your project you only need export a array named $DOCKER_CONTAINERS
+$ export DOCKER_CONTAINERS=("CONTAINER_NAME_1" "CONTAINER_NAME_2")
+
+# after this you can run:
+$ sh gocker destroy -a # for example
+~~~
