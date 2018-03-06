@@ -4,3 +4,4 @@
 . ${GOCKER_DIR}/config/project.sh
 . ${GOCKER_DIR}/config/docker.sh
 . ${GOCKER_DIR}/config/sentry.sh
+. ./environment.cfg # This file contains the project configuration

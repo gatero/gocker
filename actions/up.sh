@@ -28,10 +28,17 @@ build_image() {
 #: Description : Verify if the docker_compose_file file is defined
 #: and checks if the docker image exist and then start the project
 start_project() {
-  local docker_compose_file=$1
+  rebuild
+  if [ ! -f ./docker-compose.yml ]; then
+    local docker_compose_file=$1
+  else
+    local docker_compose_file="./docker-compose.yml" 
+  fi
 
   if [ -f "$docker_compose_file" ]; then
     run_docker "$docker_compose_file"
+  else
+    init
   fi
 }
 
@@ -61,7 +68,7 @@ up() {
       esac
     done
   else
-    show_docs
+    start_project
   fi
 }
 

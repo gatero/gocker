@@ -4,10 +4,8 @@
 #: Date : 27/feb/2017
 #: Author : Daniel Ortega @gatero <me@daniel-ortega.mx>
 #: Version : 0.0.3
-#: Description : Run the project using docker-compose
+#: Description : Rebuild docker image
 #: Options : 
-#:    -f) use your own docker-file
-#:    -d) default docker-compose
 #:    -h|*) help option
 
 #: Type : function
@@ -25,12 +23,9 @@ show_doc() {
 #: Type : function
 #: Description : show help
 rebuild() {
-  if [ $1 != "-h" ]; then
-    if [[ "$(docker images)" =~ $DOCKER_IMAGE_GOLANG ]]; then
-      destroy -a && build_image
-    fi
-  else
-    show_doc
+  if ! [[ "$(docker images)" =~ $DOCKER_IMAGE_GOLANG ]]; then
+    destroy -a
+    build_image
   fi
 }
 
